@@ -54,6 +54,8 @@ services:
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    volumes:
+      - kafka_data:/var/lib/kafka/data
     healthcheck:
       test: ["CMD-SHELL", "kafka-topics --bootstrap-server localhost:9092 --list"]
       interval: 15s
@@ -101,6 +103,13 @@ services:
       kafka:
         condition: service_healthy
 
+# ==========================================
+# Volumes - los datos persisten aunque
+# hagas docker-compose down
+# ==========================================
 volumes:
   postgres_data:
+  kafka_data:
+  zookeeper_data:
+  zookeeper_logs:
   maven_cache:
