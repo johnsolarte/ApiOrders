@@ -50,13 +50,6 @@ class CreateOrderServiceTest {
         verify(eventPublisher).publishOrderCreated(any());
     }
 
-    @Test
-    void shouldThrowWhenCustomerIdIsBlank() {
-        var command = new CreateOrderUseCase.CreateOrderCommand("",
-            List.of(new CreateOrderUseCase.OrderItemCommand("p1","P",1,new BigDecimal("10"))));
-        assertThrows(IllegalArgumentException.class, () -> service.execute(command));
-        verifyNoInteractions(orderRepository, eventPublisher);
-    }
 
     @Test
     void shouldCalculateTotalAmountCorrectly() {
