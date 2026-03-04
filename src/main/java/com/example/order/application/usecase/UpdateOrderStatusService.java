@@ -23,7 +23,11 @@ public class UpdateOrderStatusService implements UpdateOrderStatusUseCase {
         String prev = o.getStatus().name();
         o.confirm();
         Order saved = repo.save(o);
-        pub.publishOrderStatusChanged(saved, prev);
+        try {
+            pub.publishOrderStatusChanged(saved, prev);
+        } catch (Exception e) {
+            System.out.println("Error publishing event: " + e.getMessage());
+        }
         return saved;
     }
 
@@ -33,7 +37,11 @@ public class UpdateOrderStatusService implements UpdateOrderStatusUseCase {
         String prev = o.getStatus().name();
         o.cancel();
         Order saved = repo.save(o);
-        pub.publishOrderStatusChanged(saved, prev);
+        try {
+            pub.publishOrderStatusChanged(saved, prev);
+        } catch (Exception e) {
+            System.out.println("Error publishing event: " + e.getMessage());
+        }
         return saved;
     }
 
@@ -43,7 +51,11 @@ public class UpdateOrderStatusService implements UpdateOrderStatusUseCase {
         String prev = o.getStatus().name();
         o.startProcessing();
         Order saved = repo.save(o);
-        pub.publishOrderStatusChanged(saved, prev);
+        try {
+            pub.publishOrderStatusChanged(saved, prev);
+        } catch (Exception e) {
+            System.out.println("Error publishing event: " + e.getMessage());
+        }
         return saved;
     }
 

@@ -23,8 +23,16 @@ public class OrderRepositoryAdapter implements OrderRepository {
 
     @Override
     public Order save(Order order) {
-        OrderEntity entity = mapper.toEntity(order);
-        OrderEntity.persist(entity);
+        OrderEntity entity = OrderEntity.findById(order.getId());
+        if (entity != null) {
+            // update existing
+            entity.status = order.getStatus().name();
+            entity.updatedAt = order.getUpdatedAt();
+        } else {
+            // new
+            entity = mapper.toEntity(order);
+            entity.persist();
+        }
         return mapper.toDomain(entity);
     }
 
