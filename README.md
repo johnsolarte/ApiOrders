@@ -1,7 +1,7 @@
 # Order API - Quarkus + Kafka + Arquitectura Hexagonal
 
 ## Stack
-- Java 21, Quarkus 3.8, Apache Kafka, PostgreSQL
+- Java 21, Quarkus 3.32.1, Apache Kafka, PostgreSQL
 - Arquitectura Hexagonal, SOLID, Patrones de Diseno
 
 ## Levantar el proyecto
@@ -12,9 +12,17 @@ docker-compose up -d
 ```
 
 ### 2. Ejecutar app
+
+#### Opción 1: En host
 ```
 mvn quarkus:dev
 ```
+
+#### Opción 2: En Docker
+```
+docker-compose up -d
+```
+Esto inicia toda la infraestructura (PostgreSQL, Kafka, Kafka UI) y la app Quarkus en contenedores.
 
 - App: http://localhost:8080
 - Swagger: http://localhost:8080/swagger-ui
